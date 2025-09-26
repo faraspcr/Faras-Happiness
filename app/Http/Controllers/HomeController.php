@@ -1,32 +1,20 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class PegawaiController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
-        $tgl_lahir = Carbon::parse('2006-02-03');
-        $age       = $tgl_lahir->age;
-
-        $tgl_masuk = Carbon::parse('2028-02-03');
-        $today     = Carbon::today();
-        $Diff      = $today->diffInDays($tgl_masuk);
-
-        $data['name']               = 'faras';
-        $data['umur']               = $age;
-        $data['future_goal']        = 'Ingin menjadi seorang fullstack developer';
-        $data['wisuda']             = $tgl_masuk->ToDateString();
-        $data['hobi']               = ['main bola', 'futsal', 'badminton', 'masak', 'Smain game'];
-        $data['time_to_study_left'] = $Diff;
-        $data['current_semester']   = '3';
-        return view('pegawai', $data);
+    $data ['username']        = 'Heroku';
+    $data ['last_login']      = date('Y-m-d H:i:s');
+    $data ['list_pendidikan'] = ['SD','SMP','SMA','S1','S2','S3'];
+    return view('home', $data );
     }
 
     /**

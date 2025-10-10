@@ -11,10 +11,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-    $data ['username']        = 'faras';
-    $data ['last_login']      = date('Y-m-d H:i:s');
-    $data ['list_pendidikan'] = ['SD','SMP','SMA','S1','S2','S3'];
-    return view('home', $data );
+        $data ['username']        = 'Faras';
+        $data ['remote']           = 'github';
+        $data ['last_login']      = date('Y-m-d H:i:s');
+        $data ['list_pendidikan'] = ['SD','SMP','SMA','S1','S2','S3'];
+        return view('home', $data );
     }
 
     /**

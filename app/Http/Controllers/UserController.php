@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -11,9 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+         $data['dataUser'] = User::all();
+        return view('admin.user.index', $data);
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -30,7 +31,7 @@ class UserController extends Controller
         $data['name']                  = $request->name;
         $data['email']                 = $request->email;
         $data['password']              = $request->password;
-        // $data['password_confirmation'] = $request->gender;
+        $data['password'] = Hash::make($request->password);
 
        User::create($data);
 

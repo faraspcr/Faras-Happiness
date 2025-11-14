@@ -1,4 +1,4 @@
-VANESYA WILYAN, Now
+
 @extends('layouts.admin.app')
 @section('content')
       {{-- start main content --}}
@@ -49,7 +49,7 @@ VANESYA WILYAN, Now
                                 <tbody>
                                     @foreach ($dataUser as $item)
                                         <tr>
-                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->name }}</td>
                                             <td>{{ $item->email}}</td>
                                             <td>{{ $item->password}}</td>
 

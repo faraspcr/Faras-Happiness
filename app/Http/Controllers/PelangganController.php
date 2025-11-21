@@ -9,9 +9,16 @@ class PelangganController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['dataPelanggan'] = Pelanggan::all();
+        // Daftr kolom
+        $filterableColumns     = ['gender'];
+        $searchableColumns     = ['first_name','last_name','email', 'phone'];
+        $data['dataPelanggan'] = Pelanggan::filter($request, $filterableColumns)
+            ->search($request, $searchableColumns)
+            ->paginate(10)
+            ->onEachSide(2);
+
         return view('admin.pelanggan.index', $data);
     }
 
@@ -66,7 +73,7 @@ class PelangganController extends Controller
     public function update(Request $request, String $id)
     {
         $pelanggan_id = $id;
-        $pelanggan = Pelanggan::findOrFail($pelanggan_id);
+        $pelanggan    = Pelanggan::findOrFail($pelanggan_id);
 
         $pelanggan->first_name = $request->first_name;
         $pelanggan->last_name  = $request->last_name;
@@ -83,11 +90,12 @@ class PelangganController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(String $id)
-{
-    $pelanggan = Pelanggan::findOrFail($id);
+    {
+        $pelanggan = Pelanggan::findOrFail($id);
 
         $pelanggan->delete();
         return redirect()->route('pelanggan.index')->with('success', 'Data berhasil dihapus!');
 
     }
+
 }

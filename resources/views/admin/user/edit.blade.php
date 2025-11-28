@@ -10,137 +10,160 @@
                             </svg>
                         </a>
                     </li>
-                    <li class="breadcrumb-item"><a href="#">Pelanggan</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Edit Pelanggan</li>
+                    <li class="breadcrumb-item"><a href="{{ route('user.index') }}">User</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit User</li>
                 </ol>
             </nav>
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">Edit Pelanggan</h1>
-                    <p class="mb-0">Form untuk mengedit data pelanggan baru.</p>
+                    <h1 class="h4">Edit User</h1>
+                    <p class="mb-0">Form untuk mengedit data user.</p>
                 </div>
                 <div>
-                    <a href="{{route('pelanggan.index')}}" class="btn btn-primary"><i class="far fa-question-circle me-1"></i> Kembali</a>
+                    <a href="{{route('user.index')}}" class="btn btn-primary"><i class="far fa-question-circle me-1"></i> Kembali</a>
                 </div>
             </div>
         </div>
+
 
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="card border-0 shadow components-section">
                     <div class="card-body">
+                        {{-- Success/Error Messages --}}
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Sukses!</strong> {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
 
 
-                        <form action="{{route('pelanggan.update', $dataPelanggan->pelanggan_id)}}" method="POST">
+                        @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Error!</strong> {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
+
+                        {{-- Debug Info --}}
+                        <div class="alert alert-info d-none">
+                            <strong>Debug Info:</strong><br>
+                            User ID: {{ $user->id }}<br>
+                            Profile Picture: {{ $user->profile_picture ?? 'NULL' }}<br>
+                            Storage URL: {{ $user->profile_picture ? Storage::url($user->profile_picture) : 'NULL' }}
+                        </div>
+
+
+                        <form action="{{route('user.update', $user->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row mb-4">
-                                <div class="col-lg-4 col-sm-6">
-                                    <!-- First Name -->
+                                <div class="col-lg-6 col-sm-12">
+                                    <!-- Name -->
                                     <div class="mb-3">
-                                        <label for="first_name" class="form-label">First name</label>
-                                        <input type="text" name ="first_name" class="form-control"value="{{ $dataPelanggan->first_name }}" required>
+                                        <label for="name" class="form-label">Nama Lengkap</label>
+                                        <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
+                                        @error('name')
+                                            <div class="text-danger small mt-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
 
-
-
-
-
-
-
-                                    <!-- Last Name -->
-                                    <div class="mb-3">
-                                        <label for="last_name" class="form-label">Last name</label>
-                                        <input type="text" name="last_name" class="form-control"value="{{ $dataPelanggan->last_name }}" required>
-                                    </div>
-                                </div>
-
-
-
-
-
-
-
-
-                                <div class="col-lg-4 col-sm-6">
-                                    <!-- Birthday -->
-                                    <div class="mb-3">
-                                        <label for="birthday" class="form-label">Birthday</label>
-                                        <input type="date" name="birthday" class="form-control"value="{{ $dataPelanggan->birthday }}">
-                                    </div>
-
-
-
-
-
-
-
-
-                                    <!-- Gender -->
-                                    <div class="mb-3">
-                                        <label for="gender" class="form-label">Gender</label>
-                                        <select id="gender" name="gender" class="form-select">
-                                            <option selected>option</option>
-                                            <option value="Male" {{$dataPelanggan->gender == 'Male' ? 'selected' : ''}}  >Male</option>
-                                            <option value="Female" {{$dataPelanggan->gender == 'Female' ? 'selected' : ''}} >Female</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-
-
-
-
-
-
-
-                                <div class="col-lg-4 col-sm-12">
                                     <!-- Email -->
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="text" name="email" id="email" class="form-control" value="{{ $dataPelanggan->email }}" required>
+                                        <input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}" required>
+                                        @error('email')
+                                            <div class="text-danger small mt-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
 
-
-
-
-
-
-
-                                    <!-- Phone -->
+                                    <!-- Profile Picture -->
                                     <div class="mb-3">
-                                        <label for="phone" class="form-label">Phone</label>
-                                        <input type="text" name="phone" class="form-control" value="{{ $dataPelanggan->phone }}">
+                                        <label for="profile_picture" class="form-label">Profile Picture</label>
+                                        <input type="file" name="profile_picture" id="profile_picture" class="form-control"
+                                               accept="image/jpeg,image/png,image/jpg,image/gif">
+                                        @error('profile_picture')
+                                            <div class="text-danger small mt-1">{{ $message }}</div>
+                                        @enderror
+                                        <small class="text-muted">Format: JPEG, PNG, JPG, GIF (Maksimal 2MB)</small>
+
+
+                                        <!-- Show current profile picture if exists -->
+                                        @if($user->profile_picture)
+                                            <div class="mt-2">
+                                                <label class="form-label">Current Picture:</label>
+                                                <div>
+                                                    <img src="{{ asset('storage/' . $user->profile_picture) }}"
+                                                         alt="Profile Picture"
+                                                         class="img-thumbnail"
+                                                         width="150"
+                                                         onerror="this.src='{{ asset('assets-admin/img/team/profile-picture-3.jpg') }}'">
+                                                    <div class="mt-1">
+                                                        <small class="text-muted">File: {{ $user->profile_picture }}</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="mt-2">
+                                                <label class="form-label">Current Picture:</label>
+                                                <div>
+                                                    <img src="{{ asset('assets-admin/img/team/profile-picture-3.jpg') }}"
+                                                         alt="Default Avatar"
+                                                         class="img-thumbnail"
+                                                         width="150">
+                                                    <small class="text-muted d-block">Default profile picture</small>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
+                                </div>
+
+
+                                <div class="col-lg-6 col-sm-12">
+                                    <!-- Password -->
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password Baru</label>
+                                        <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak ingin mengubah password">
+                                        @error('password')
+                                            <div class="text-danger small mt-1">{{ $message }}</div>
+                                        @enderror
+                                        <small class="text-muted">Minimal 8 karakter</small>
                                     </div>
 
 
-
-
-
-
+                                    <!-- Konfirmasi Password -->
+                                    <div class="mb-3">
+                                        <label for="password_confirmation" class="form-label">Konfirmasi Password Baru</label>
+                                        <input type="password" name="password_confirmation" class="form-control" placeholder="Ulangi password baru">
+                                        <small class="text-muted">Harus sama dengan password baru</small>
+                                    </div>
 
 
                                     <!-- Buttons -->
-                                    <div class="">
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                        <a href="{{ route('pelanggan.index') }}" class="btn btn-outline-secondary ms-2">Batal</a>
+                                    <div class="mt-4">
+                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        <a href="{{ route('user.index') }}" class="btn btn-outline-secondary ms-2">Batal</a>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
-
-
-
-
-
-
-
-
                 </div>
             </div>
         </div>

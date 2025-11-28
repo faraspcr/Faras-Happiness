@@ -43,9 +43,15 @@ Route::get('/pegawai', [PegawaiController::class, 'index']);
 Route::post('question/store', [QuestionController::class, 'store'])
     ->name('question.store');
 
-Route::get('dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard');
+// Dashboard Route
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::resource('pelanggan', PelangganController::class);
+// Pelanggan Routes
+Route::resource('pelanggan', PelangganController::class);
 
-    route::resource('user',UserController::class);
+// User Routes
+Route::resource('user', UserController::class);
+
+// Tambahan route untuk file upload
+Route::post('/pelanggan/{id}/upload-files', [PelangganController::class, 'uploadFiles'])->name('pelanggan.upload-files');
+Route::delete('/pelanggan/{id}/delete-file/{fileId}', [PelangganController::class, 'deleteFile'])->name('pelanggan.delete-file');

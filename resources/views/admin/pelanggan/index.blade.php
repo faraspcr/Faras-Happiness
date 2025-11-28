@@ -81,8 +81,6 @@
                             <tbody>
                                 @foreach ($dataPelanggan as $item)
                                     <tr>
-                                        {{-- <td>{{ ($dataPelanggan->currentPage() - 1) * $dataPelanggan->perPage() + $item->iteration }}
-                                        </td> --}}
                                         <td>{{ $item->first_name }}</td>
                                         <td>{{ $item->last_name }}</td>
                                         <td>{{ $item->birthday }}</td>
@@ -90,9 +88,25 @@
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
                                         <td>
-                                            {{-- ini edit --}}
-                                            <a href="{{ route('pelanggan.edit', $item->pelanggan_id) }}"
+                                            {{-- TOMBOL DETAIL --}}
+                                            <a href="{{ route('pelanggan.show', $item->pelanggan_id) }}"
                                                 class="btn btn-info btn-sm">
+                                                <svg class="icon icon-xs me-2" data-slot="icon" fill="none"
+                                                    stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z">
+                                                    </path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                    </path>
+                                                </svg>
+                                                Detail
+                                            </a>
+
+                                            {{-- TOMBOL EDIT --}}
+                                            <a href="{{ route('pelanggan.edit', $item->pelanggan_id) }}"
+                                                class="btn btn-warning btn-sm">
                                                 <svg class="icon icon-xs me-2" data-slot="icon" fill="none"
                                                     stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -102,7 +116,8 @@
                                                 </svg>
                                                 Edit
                                             </a>
-                                            {{-- ini delete --}}
+
+                                            {{-- TOMBOL DELETE --}}
                                             <form action="{{ route('pelanggan.destroy', $item->pelanggan_id) }}"
                                                 method="POST" class="d-inline">
                                                 @csrf
@@ -118,6 +133,7 @@
                                                     </svg>
                                                     Delete
                                                 </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

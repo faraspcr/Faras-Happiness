@@ -32,7 +32,7 @@
         <div class="col-12 mb-4">
             <div class="card border-0 shadow components-section">
                 <div class="card-body">
-                    <form action="{{ route('pelanggan.store') }}" method="POST">
+                    <form action="{{ route('pelanggan.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-4">
                             <div class="col-lg-4 col-sm-6">
@@ -89,6 +89,39 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- ✅ BAGIAN FILE PENDUKUNG -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="card border-0 shadow">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">File Pendukung</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted mb-3">
+                                            Anda dapat mengupload dokumen pendukung saat membuat data pelanggan ini.
+                                        </p>
+
+                                        <div class="mb-3">
+                                            <label for="files" class="form-label">Pilih File</label>
+                                            <input type="file" name="files[]" id="files" class="form-control" multiple
+                                                   accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.txt">
+                                            <div class="form-text">
+                                                Gunakan Ctrl/Cmd untuk memilih banyak file. Format yang didukung: JPG, PNG, PDF, DOC, TXT (Maks. 2MB per file)
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <small class="text-muted">
+                                                <i class="fas fa-info-circle me-1"></i>
+                                                File akan tersimpan setelah data pelanggan berhasil dibuat.
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ✅ END FILE PENDUKUNG -->
                     </form>
                 </div>
            </div>

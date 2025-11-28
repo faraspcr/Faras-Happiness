@@ -1,5 +1,4 @@
 @extends('layouts.admin.app')
-
 @section('content')
     {{-- start main content --}}
     <div class="py-4">
@@ -29,7 +28,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-12 mb-4">
             <div class="card border-0 shadow mb-4">
@@ -104,6 +102,7 @@
                                                 Detail
                                             </a>
 
+
                                             {{-- TOMBOL EDIT --}}
                                             <a href="{{ route('pelanggan.edit', $item->pelanggan_id) }}"
                                                 class="btn btn-warning btn-sm">
@@ -116,6 +115,7 @@
                                                 </svg>
                                                 Edit
                                             </a>
+
 
                                             {{-- TOMBOL DELETE --}}
                                             <form action="{{ route('pelanggan.destroy', $item->pelanggan_id) }}"
@@ -149,3 +149,6 @@
     </div>
     {{-- end main content --}}
 @endsection
+
+
+

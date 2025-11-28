@@ -64,13 +64,11 @@
                                         <input type="text" name="name" id="name" class="form-control" required value="{{ old('name') }}">
                                     </div>
 
-
                                     <!-- Email -->
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
                                         <input type="email" name="email" id="email" class="form-control" required value="{{ old('email') }}">
                                     </div>
-
 
                                     <!-- Profile Picture -->
                                     <div class="mb-3">
@@ -84,7 +82,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="col-lg-6 col-sm-6">
                                     <!-- Password -->
                                     <div class="mb-3">
@@ -95,13 +92,11 @@
                                         @enderror
                                     </div>
 
-
                                     <!-- Confirm Password -->
                                     <div class="mb-3">
                                         <label for="password_confirmation" class="form-label">Password Confirmation</label>
                                         <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
                                     </div>
-
 
                                     <!-- Buttons -->
                                     <div class="mt-4">

@@ -25,7 +25,6 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="card border-0 shadow components-section">
@@ -38,14 +37,12 @@
                             </div>
                         @endif
 
-
                         @if (session('error'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>Error!</strong> {{ session('error') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
-
 
                         @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -67,7 +64,6 @@
                             Storage URL: {{ $user->profile_picture ? Storage::url($user->profile_picture) : 'NULL' }}
                         </div>
 
-
                         <form action="{{route('user.update', $user->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -82,7 +78,6 @@
                                         @enderror
                                     </div>
 
-
                                     <!-- Email -->
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
@@ -91,7 +86,6 @@
                                             <div class="text-danger small mt-1">{{ $message }}</div>
                                         @enderror
                                     </div>
-
 
                                     <!-- Profile Picture -->
                                     <div class="mb-3">
@@ -102,7 +96,6 @@
                                             <div class="text-danger small mt-1">{{ $message }}</div>
                                         @enderror
                                         <small class="text-muted">Format: JPEG, PNG, JPG, GIF (Maksimal 2MB)</small>
-
 
                                         <!-- Show current profile picture if exists -->
                                         @if($user->profile_picture)
@@ -133,8 +126,6 @@
                                         @endif
                                     </div>
                                 </div>
-
-
                                 <div class="col-lg-6 col-sm-12">
                                     <!-- Password -->
                                     <div class="mb-3">
@@ -146,15 +137,12 @@
                                         <small class="text-muted">Minimal 8 karakter</small>
                                     </div>
 
-
                                     <!-- Konfirmasi Password -->
                                     <div class="mb-3">
                                         <label for="password_confirmation" class="form-label">Konfirmasi Password Baru</label>
                                         <input type="password" name="password_confirmation" class="form-control" placeholder="Ulangi password baru">
                                         <small class="text-muted">Harus sama dengan password baru</small>
                                     </div>
-
-
                                     <!-- Buttons -->
                                     <div class="mt-4">
                                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

@@ -31,7 +31,6 @@
             </div>
         </div>
 
-
         {{-- Success/Error Messages --}}
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -40,7 +39,6 @@
             </div>
         @endif
 
-
         @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Error!</strong> {{ session('error') }}
@@ -48,14 +46,12 @@
             </div>
         @endif
 
-
         @if (session('update'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Sukses!</strong> {{ session('update') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-
 
         <div class="row">
             <div class="col-12 mb-4">
@@ -104,7 +100,6 @@
                                                         Edit
                                                     </a>
 
-
                                                     {{-- Delete Button --}}
                                                     <form action="{{ route('user.destroy', $item->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
                                                         @csrf
@@ -125,13 +120,8 @@
                             <div class="mt-3">
                             {{ $dataUser->links('pagination::bootstrap-5') }}
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
         </div>
-        {{-- end main content --}}
-@endsection
+      @endsection

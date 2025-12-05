@@ -10,6 +10,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $dataUser = User::orderBy('created_at', 'desc')->paginate(10);

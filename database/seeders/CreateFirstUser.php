@@ -1,12 +1,10 @@
 <?php
-
 namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
-use App\Models\User; // ⬅️ INI YANG BENAR, BUKAN Illuminate\Foundation\Auth\User
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Faker\Factory; // ⬅️ TAMBAHKIN INI
+use Faker\Factory;
 
 class CreateFirstUser extends Seeder
 {
@@ -32,7 +30,6 @@ class CreateFirstUser extends Seeder
                 'password' => Hash::make('password123'),
             ]);
         }
-
         echo "Berhasil membuat 51 users! \n";
         echo "✅ 1 Admin \n";
         echo "✅ 50 User Dummy dengan nama random \n";

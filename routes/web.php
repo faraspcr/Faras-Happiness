@@ -43,7 +43,6 @@ Route::get('/home', [HomeController::class, 'index'])
     ->name('home');
 
 Route::get('/pegawai', [PegawaiController::class, 'index']);
-
 Route::post('question/store', [QuestionController::class, 'store'])
     ->name('question.store');
 
@@ -74,7 +73,6 @@ Route::group(['middleware' => ['checkislogin']], function () {
         Route::put('user/{user}', [UserController::class, 'update'])->name('user.update');
         Route::delete('user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
     });
-
     // =============================================
     // ROUTE PELANGGAN UNTUK SEMUA ROLE YANG LOGIN
     // =============================================

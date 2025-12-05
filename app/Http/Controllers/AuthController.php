@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,9 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
         if ($user && Hash::check($request->password, $user->password)) {
             Auth::login($user);
+
+            // Simpan pesan ke session
+            session(['last_login' => now()]);
             // Simpan waktu login WIB
             date_default_timezone_set('Asia/Jakarta');
             $waktuWIB = date('Y-m-d H:i:s');

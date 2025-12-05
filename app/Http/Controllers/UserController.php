@@ -33,6 +33,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
+            'role' => 'required|in:Super Admin,Administrator,Pelanggan,Mitra', // ✅ TAMBAH VALIDASI ROLE
             'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -41,6 +42,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->role = $request->role; // ✅ TAMBAH ROLE
 
         // Upload foto jika ada
         if ($request->hasFile('profile_picture')) {
@@ -73,12 +75,14 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|min:6', // Password boleh kosong saat edit
+            'role' => 'required|in:Super Admin,Administrator,Pelanggan,Mitra', // ✅ TAMBAH VALIDASI ROLE
             'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         // 1. Update data dasar
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role = $request->role; // ✅ TAMBAH UPDATE ROLE
 
         // 2. Cek apakah password diisi? Kalau ya, update. Kalau tidak, biarkan lama.
         if ($request->filled('password')) {

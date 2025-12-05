@@ -70,6 +70,23 @@
                                         <input type="email" name="email" id="email" class="form-control" required value="{{ old('email') }}">
                                     </div>
 
+                                    <!-- ROLE - TAMBAHAN BARU -->
+                                    <div class="mb-3">
+                                        <label for="role" class="form-label">Role</label>
+                                        <select name="role" id="role" class="form-select" required>
+                                            <option value="">Pilih Role</option>
+                                            <option value="Super Admin" {{ old('role') == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
+                                            <option value="Administrator" {{ old('role') == 'Administrator' ? 'selected' : '' }}>Administrator</option>
+                                            <option value="Pelanggan" {{ old('role') == 'Pelanggan' ? 'selected' : '' }}>Pelanggan</option>
+                                            <option value="Mitra" {{ old('role') == 'Mitra' ? 'selected' : '' }}>Mitra</option>
+                                        </select>
+                                        @error('role')
+                                            <div class="text-danger small mt-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-6">
                                     <!-- Profile Picture -->
                                     <div class="mb-3">
                                         <label for="profile_picture" class="form-label">Profile Picture</label>
@@ -80,9 +97,7 @@
                                         @enderror
                                         <small class="text-muted">Format: JPEG, PNG, JPG, GIF (Maksimal 2MB)</small>
                                     </div>
-                                </div>
 
-                                <div class="col-lg-6 col-sm-6">
                                     <!-- Password -->
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
@@ -111,4 +126,3 @@
             </div>
         </div>
 @endsection
-
